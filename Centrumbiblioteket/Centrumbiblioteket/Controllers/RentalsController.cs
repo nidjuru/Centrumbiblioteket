@@ -21,6 +21,21 @@ namespace Centrumbiblioteket.Controllers
             _context = context;
         }
 
+        // POST: api/Rentals
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for
+        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpPost]
+        public async Task<ActionResult<Rental>> PostRental(Rental rental)
+        {
+            rental.RentalDate = DateTime.Now;
+            rental.ReturnDate = DateTime.Now.AddDays(30);
+            rental.Rented = true;
+            _context.Rentals.Add(rental);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetRental", new { id = rental.RentalId }, rental);
+        }
+
         // GET: api/Rentals
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Rental>>> GetRentals()
@@ -33,6 +48,12 @@ namespace Centrumbiblioteket.Controllers
         public async Task<ActionResult<Rental>> GetRental(int id)
         {
             var rental = await _context.Rentals.FindAsync(id);
+            var rentals = await _context.Rentals
+                .Include(r => r.Inventory)
+                .ThenInclude(r => r.Book)
+                .Include(r => r.Customer)
+                .Where(r => r.CustomerId == id)
+                .FirstOrDefaultAsync();
 
             if (rental == null)
             {
@@ -45,15 +66,20 @@ namespace Centrumbiblioteket.Controllers
         // PUT: api/Rentals/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutRental(int id, Rental rental)
+        [HttpPut("return/{id}")]
+        public async Task<IActionResult> ReturnRental(int id, Rental rental)
         {
             if (id != rental.RentalId)
             {
                 return BadRequest();
             }
 
+            rental.Rented = false;
+
+            rental.ReturnDate = DateTime.Now;
+
             _context.Entry(rental).State = EntityState.Modified;
+
 
             try
             {
@@ -72,18 +98,6 @@ namespace Centrumbiblioteket.Controllers
             }
 
             return NoContent();
-        }
-
-        // POST: api/Rentals
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        [HttpPost]
-        public async Task<ActionResult<Rental>> PostRental(Rental rental)
-        {
-            _context.Rentals.Add(rental);
-            await _context.SaveChangesAsync();
-
-            return CreatedAtAction("GetRental", new { id = rental.RentalId }, rental);
         }
 
         // DELETE: api/Rentals/5

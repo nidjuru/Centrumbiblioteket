@@ -14,7 +14,7 @@ namespace Centrumbiblioteket.Models
         public long TelephoneNumber { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [MaxLength(40), MinLength(4)]
+        [MaxLength(40), MinLength(4)]//Varför i guds namn la jag minlength 4?????? :(
         public string CustomerFirstName { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
