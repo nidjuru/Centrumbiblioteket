@@ -14,6 +14,9 @@ namespace Centrumbiblioteket.Models
         public int BookId { get; set; }
         public List<Rental> Rentals { get; set; }
         //public Rental Rental { get; set; }
-        //public int RentalId { get; set; }
+        public int? RentalId { get; set; }
+
+        //Kan vara fel här, får kolla upp det!
+        //Får också kolla upp ifall det ska vara lista här för relationen.
     }
 }
