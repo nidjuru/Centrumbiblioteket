@@ -15,9 +15,12 @@ namespace Centrumbiblioteket.Models
         [Required]
         //[Column(TypeName = "VARCHAR")]
         [MaxLength(40), MinLength(2)]
+        [Range(0, 5, ErrorMessage = "Uppge namn med bokstäver, försök igen!")]
+
         public string CustomerFirstName { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
+        [Range(0, 5, ErrorMessage = "Uppge efternamet med bokstäver, försök igen!")]
         [MaxLength(40), MinLength(4)]
 
         public string CustomerLastName { get; set; }

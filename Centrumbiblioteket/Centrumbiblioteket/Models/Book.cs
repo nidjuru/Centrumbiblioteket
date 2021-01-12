@@ -12,11 +12,14 @@ namespace Centrumbiblioteket.Models
         public int BookId { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [MaxLength(40), MinLength(4)]
+        [MaxLength(40), MinLength(2, ErrorMessage = "Vänligen använd bokstäver när du ska lägga in en ny bok!")]
         public string Title { get; set; }
         [Required]
+        [Range(0, 5, ErrorMessage = "Ange ett årtal med 4 siffror!")]
         public int ReleaseYear { get; set; }
         [Required]
+        [Range(0, 5, ErrorMessage = "ISBN består utav 13 siffror, vänligen försök igen.")]
+
         public long ISBN { get; set; }
 
         public Rating Rating { get; set; }

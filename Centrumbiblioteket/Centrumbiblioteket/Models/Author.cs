@@ -11,11 +11,11 @@ namespace Centrumbiblioteket.Models
         public int AuthorId { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [MaxLength(40), MinLength(4)]
+        [MaxLength(40), MinLength(2, ErrorMessage = "Vänligen använd bokstäver!")]
         public string AuthorFirstName { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [MaxLength(40), MinLength(4)]
+        [MaxLength(40), MinLength(2, ErrorMessage = "Vänligen använd bokstäver!")]
         public string AuthorLastName { get; set; }
         public List<Book_Author> Book_Authors { get; set; }
     }

@@ -48,12 +48,12 @@ namespace Centrumbiblioteket.Controllers
         public async Task<ActionResult<Rental>> GetRental(int id)
         {
             var rental = await _context.Rentals.FindAsync(id);
-            var rentals = await _context.Rentals
-                .Include(r => r.Inventory)
-                .ThenInclude(r => r.Book)
-                .Include(r => r.Customer)
-                .Where(r => r.CustomerId == id)
-                .FirstOrDefaultAsync();
+            //var rentals = await _context.Rentals
+            //    .Include(r => r.Inventory)
+            //    .ThenInclude(r => r.Book)
+            //    .Include(r => r.Customer)
+            //    .Where(r => r.CustomerId == id)
+            //    .FirstOrDefaultAsync();
 
             if (rental == null)
             {
