@@ -19,15 +19,15 @@ namespace Centrumbiblioteket.Controllers
         }
 
         // GET: LateRentals
-        public async Task<IActionResult> Index()
-        {
-            var context = _context.Rentals
-                   .Include(r => r.Customer)
-                   .Include(r => r.Inventory)
-                   .ThenInclude(r => r.Book)
-                   .Where(r => r.ReturnDate > DateTime.Now).Include(r => r.Inventory);//Returndate är på 30 dagar, ändrar sen.
-            return View(await context.ToListAsync());
-        }
+            public async Task<IActionResult> Index()
+            {
+                var context = _context.Rentals
+                       .Include(r => r.Customer)
+                       .Include(r => r.Inventory)
+                       .ThenInclude(r => r.Book)
+                       .Where(r => r.ReturnDate > DateTime.Now).Include(r => r.Inventory);//Returndate är på 30 dagar, ändrar sen till mindre än för att uppnå funktionaliteten som efterfrågas.
+                return View(await context.ToListAsync());
+            }
 
         // GET: LateRentals/Details/5
         public async Task<IActionResult> Details(int? id)
