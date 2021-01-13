@@ -14,14 +14,12 @@ namespace Centrumbiblioteket.Models
         public long TelephoneNumber { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [MaxLength(40), MinLength(2)]
-        [Range(0, 5, ErrorMessage = "Uppge namn med bokstäver, försök igen!")]
+        [MaxLength(40), MinLength(2, ErrorMessage = "Uppge namn med bokstäver, försök igen!")]
 
         public string CustomerFirstName { get; set; }
         [Required]
         //[Column(TypeName = "VARCHAR")]
-        [Range(0, 5, ErrorMessage = "Uppge efternamet med bokstäver, försök igen!")]
-        [MaxLength(40), MinLength(4)]
+        [MaxLength(40), MinLength(2, ErrorMessage = "Uppge efternamn med bokstäver, försök igen!")]
 
         public string CustomerLastName { get; set; }
         [Required]
