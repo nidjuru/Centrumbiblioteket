@@ -52,10 +52,6 @@ From Line 22.
 ```
 ----
 
-##### Architecture
-
-
----
 
 ##### Contact.
 If you have any questions or want to get in touch with me, you can reach me by email.
